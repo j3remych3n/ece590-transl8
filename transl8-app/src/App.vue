@@ -1,5 +1,4 @@
 <template>
-<div id="app-wrapper">
   <v-app id="t8-app">
     <v-container fluid id="t8-container">
       <v-layout row>
@@ -10,7 +9,7 @@
                 <v-img id="logo" src="./static/logo.png" contain></v-img>
               </v-flex>
               <v-spacer></v-spacer>
-              <v-flex xs7>
+              <v-flex xs6>
                 <v-select 
                   background-color="blurple"
                   dark
@@ -26,7 +25,7 @@
         <v-flex xs6>
           <v-toolbar class="top-toolbar" prominent color="blurple" flat>
             <v-layout>
-              <v-flex xs7>
+              <v-flex xs6>
                 <v-select 
                   color="blurple"
                   prepend-inner-icon="translate"
@@ -46,41 +45,44 @@
           <v-card tile class="convo" flat color="hwhite">
             <v-container class="convo-container">
               <v-layout row>
-                <flex xs12>
                   <v-card class="text-card-received" color="hwhite darken-1">
-                    <v-card-text>yolo swag</v-card-text>
+                    <v-card-text>yolo swag asdfasdfasdfasdfas</v-card-text>
+                    <v-btn
+                        small
+                        absolute
+                        dark
+                        fab
+                        top
+                        right
+                        color="blurple"
+                        id="help-btn">?
+                      </v-btn>
                   </v-card>
-                </flex>
                 <v-spacer></v-spacer>
               </v-layout>
               <v-layout>
                <v-spacer></v-spacer>
-                <flex xs12>
                   <v-card dark class="text-card-sent" color="blurple">
                     <v-card-text>lmao wtf</v-card-text>
                   </v-card>
-                </flex>
               </v-layout>
             </v-container>
           </v-card>
         </v-flex>
         <v-flex xs6>
           <v-card tile class="convo" flat color="blurple">
-            <v-container class="convo-container">
+            <v-container class="convo-container right-convo">
               <v-layout>
                <v-spacer></v-spacer>
-                <flex xs12>
-                  <v-card dark class="text-card-sent" color="blurple">
+                  <v-card dark class="text-card-sent" color="blurple darken-1">
                     <v-card-text>lmao wtf</v-card-text>
                   </v-card>
-                </flex>
               </v-layout>
               <v-layout row>
-                <flex xs12>
-                  <v-card class="text-card-received" color="hwhite darken-1">
-                    <v-card-text>yolo swag</v-card-text>
+                  <v-card class="text-card-received" color="hwhite">
+                    <v-card-text>yolo swag 
+                    </v-card-text>
                   </v-card>
-                </flex>
                 <v-spacer></v-spacer>
               </v-layout>
             </v-container>
@@ -95,10 +97,11 @@
             <v-card tile flat color="hwhite" class="input-card">
                 <v-layout row id="left-bar">
                   <v-flex xs1>
-                    <v-btn id="record-btn" small dark color="blurple" fab>
+                    <v-btn class="record-btn" small dark color="blurple" fab>
                       <v-icon>keyboard_voice</v-icon>
                     </v-btn>
                   </v-flex>
+                  <v-spacer></v-spacer>
                   <v-flex xs11>
                     <v-text-field 
                       append-icon="send" 
@@ -110,6 +113,7 @@
                       background-color="hwhite darken-1">
                     </v-text-field>
                   </v-flex>
+                  <v-spacer></v-spacer>
               </v-layout>
             </v-card>
           </v-flex>
@@ -121,6 +125,7 @@
                       <v-icon color="blurple">keyboard_voice</v-icon>
                     </v-btn>
                   </v-flex>
+                  <v-spacer></v-spacer>
                   <v-flex id="text-input" xs11>
                     <v-text-field 
                       reverse 
@@ -133,6 +138,7 @@
                       background-color="blurple darken-1">
                     </v-text-field>
                   </v-flex>
+                  <v-spacer></v-spacer>
               </v-layout>
             </v-card>
           </v-flex>
@@ -140,13 +146,12 @@
       </v-container>
     </v-footer>
   </v-app>
-  </div>
 </template>
 
 <script>
+
 export default {
   name: "App",
-  components: {}
 };
 </script>
 
@@ -158,26 +163,25 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
-
-#app-wrapper {
-  overflow-y: hidden;
 }
 
 .text-card-received {
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 0px 20px 20px 0px;
   min-height: 50px;
   /* min-width: 300px; */
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#help-btn {
+  /* margin-left: 50px; */
 }
 
 .text-card-sent {
-  margin-top: 10px;
+  margin-top: 20px;
   border-radius: 20px 0px 0px 20px;
   min-height: 50px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   /* min-width: 300px; */
 }
 
@@ -220,6 +224,10 @@ export default {
   overflow-x: hidden;
 }
 
+.right-convo {
+  padding-right: 15px;
+}
+
 .v-footer, .input-card {
   min-height: 6vh;
 }
@@ -242,9 +250,10 @@ export default {
 }
 
 #t8-app, #t8-container{
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100%;
+  min-width: 100vw; 
   z-index: 0;
+  overflow: hidden;
 }
 
 #t8-container, #footer-container {
@@ -254,5 +263,6 @@ export default {
 
 #footer-container {
   min-width: 100vw;
+  overflow:hidden;
 }
 </style>
