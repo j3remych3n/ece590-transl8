@@ -43,48 +43,15 @@
       <v-layout row>
         <v-flex xs6>
           <v-card tile class="convo" flat color="hwhite">
-            <v-container class="convo-container">
-              <v-layout row>
-                  <v-card class="text-card-received" color="hwhite darken-1">
-                    <v-card-text>yolo swag asdfasdfasdfasdfas</v-card-text>
-                    <v-btn
-                        small
-                        absolute
-                        dark
-                        fab
-                        top
-                        right
-                        color="blurple"
-                        id="help-btn">?
-                      </v-btn>
-                  </v-card>
-                <v-spacer></v-spacer>
-              </v-layout>
-              <v-layout>
-               <v-spacer></v-spacer>
-                  <v-card dark class="text-card-sent" color="blurple">
-                    <v-card-text>lmao wtf</v-card-text>
-                  </v-card>
-              </v-layout>
+            <v-container class="convo-container" ref="left-convo">
+              
             </v-container>
           </v-card>
         </v-flex>
         <v-flex xs6>
           <v-card tile class="convo" flat color="blurple">
-            <v-container class="convo-container right-convo">
-              <v-layout>
-               <v-spacer></v-spacer>
-                  <v-card dark class="text-card-sent" color="blurple darken-1">
-                    <v-card-text>lmao wtf</v-card-text>
-                  </v-card>
-              </v-layout>
-              <v-layout row>
-                  <v-card class="text-card-received" color="hwhite">
-                    <v-card-text>yolo swag 
-                    </v-card-text>
-                  </v-card>
-                <v-spacer></v-spacer>
-              </v-layout>
+            <v-container class="convo-container right-convo" ref="right-convo">
+
             </v-container>
           </v-card>
         </v-flex>
@@ -105,8 +72,11 @@
                   <v-flex xs11>
                     <v-text-field 
                       append-icon="send" 
-                      color="hwhite"
+                      color="blurple"
                       label="Send a message" 
+                      @click:append="sendLeft()"
+                      @keyup.enter="sendLeft()"
+                      v-model="leftText"
                       flat 
                       light 
                       solo 
@@ -129,8 +99,11 @@
                   <v-flex id="text-input" xs11>
                     <v-text-field 
                       reverse 
-                      append-icon="send" 
-                      color="blurple" 
+                      append-icon="send"
+                      @click:append="sendRight()"
+                      @keyup.enter="sendRight()"
+                      v-model="rightText"
+                      color="hwhite darken-1" 
                       label="Send a message" 
                       flat 
                       solo 
@@ -150,8 +123,53 @@
 
 <script>
 
+import SentMessage from './components/SentMessage.vue'
+import ReceivedMessage from './components/ReceivedMessage.vue'
+import Vue from 'vue'
+
 export default {
   name: "App",
+  data() {
+    return {
+      showConfusion: false,
+      leftText: '',
+      rightText: ''
+    }
+  },
+  components: {
+    SentMessage, ReceivedMessage
+  },
+  methods: {
+    injectConfusion: function() {
+      this.showConfusion = false;
+    },
+    sendRight: function() {
+      console.log(this.rightText);
+      this.sentFactory(this.rightText, 'right-convo')
+      this.receivedFactory(this.rightText, 'left-convo');
+      this.rightText='';
+    },
+    sendLeft: function() {
+      console.log(this.leftText);
+      this.sentFactory(this.leftText, 'left-convo')
+      this.receivedFactory(this.leftText, 'right-convo');
+      this.leftText='';
+    },
+    sentFactory: function(message, convo) {
+      var Sent = Vue.extend(SentMessage)
+      var sent = new Sent({propsData: {text: message, side: convo}})
+      sent.$mount()
+      this.$refs[convo].appendChild(sent.$el)
+      this.$forceUpdate();
+    },
+    receivedFactory: function(message, convo) {
+      var Received = Vue.extend(ReceivedMessage)
+      var received = new Received({propsData: {text: message, side: convo}})
+      received.$mount()
+      this.$refs[convo].appendChild(received.$el)
+      this.$forceUpdate();
+    }
+  }
 };
 </script>
 
@@ -165,24 +183,8 @@ export default {
   color: #2c3e50;
 }
 
-.text-card-received {
-  margin-top: 20px;
-  border-radius: 0px 20px 20px 0px;
-  min-height: 50px;
-  /* min-width: 300px; */
-  margin-bottom: 20px;
-}
-
-#help-btn {
-  /* margin-left: 50px; */
-}
-
-.text-card-sent {
-  margin-top: 20px;
-  border-radius: 20px 0px 0px 20px;
-  min-height: 50px;
-  margin-bottom: 20px;
-  /* min-width: 300px; */
+.i-am-confusion {
+  border-radius: 30px;
 }
 
 #left-bar {
@@ -220,7 +222,6 @@ export default {
   margin-right: 0px;
   min-height: 90%;
   min-width: 100%;
-  /* overflow-y: scroll; */
   overflow-x: hidden;
 }
 
