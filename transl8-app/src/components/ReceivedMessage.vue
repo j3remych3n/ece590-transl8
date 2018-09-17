@@ -1,6 +1,6 @@
 <template>
 <v-layout row>
-    <v-card class="text-card-received" v-bind:color="blockColor">
+    <v-card class="text-card-received" v-bind:color="blockColor" style="margin-left:-25px; margin-top: 20px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 20px;">
         <v-card-text v-bind:color="textColor">{{this.text}}</v-card-text>
         <v-btn
             small
@@ -12,6 +12,20 @@
             color="blurple"
             class="help-btn"
             @click.native.stop="showConfusion = true"
+             v-if="side=='left-convo'"
+            >?
+        </v-btn>
+        <v-btn
+            small
+            absolute
+            dark
+            fab
+            top
+            right
+            color="blurple darken-1"
+            class="help-btn"
+            @click.native.stop="showConfusion = true"
+             v-if="side=='right-convo'"
             >?
         </v-btn>
     </v-card>
@@ -81,9 +95,6 @@ export default {
 
 <style>
 .text-card-received {
-  margin-top: 20px;
-  border-radius: 0px 20px 20px 0px;
-  min-height: 50px;
-  margin-bottom: 20px;
+  margin-top: 20px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 20px;
 }
 </style>

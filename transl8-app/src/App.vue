@@ -46,7 +46,7 @@
                   <v-card v-if="convoEnabled()" color="hwhite" id="exit">
                     <v-layout row>
                       <v-spacer></v-spacer>
-                      <v-flex xs3>
+                      <v-flex xs2>
                         <v-btn @click="openQualtrics()" large absolute icon>
                           <v-icon color="blurple">rate_review</v-icon>
                         </v-btn>
@@ -56,6 +56,7 @@
                           <v-icon color="blurple">close</v-icon>
                         </v-btn>
                       </v-flex>
+                      <v-flex xs3></v-flex>
                     </v-layout>
                   </v-card>
                 </v-flex>
@@ -65,14 +66,14 @@
       </v-layout>
       <v-layout row>
         <v-flex xs6>
-          <v-card tile class="convo" flat color="hwhite">
+          <v-card tile v-bind:class="{convo: convoEnabled(), fscrn: !convoEnabled()}" flat color="hwhite">
             <v-container class="convo-container" ref="left-convo">
               
             </v-container>
           </v-card>
         </v-flex>
         <v-flex xs6>
-          <v-card tile class="convo" flat color="blurple">
+          <v-card tile v-bind:class="{convo: convoEnabled(), fscrn: !convoEnabled()}" flat color="blurple">
             <v-container class="convo-container right-convo" ref="right-convo">
 
             </v-container>
@@ -435,7 +436,7 @@ export default {
         };
       this.recognition.lang = this.langLeft;
       this.recognition.start();
-    },
+    }, 
     stopLeftRecord: function() {
       this.leftRecord = false;
       this.leftRecordColor = "hwhite";
@@ -461,7 +462,7 @@ export default {
           upper.$forceUpdate();
           upper.stopRightRecord();
         };
-      this.recognition.lang = this.langRight;
+      this.rightRecognition.lang = this.langRight;
       this.rightRecognition.start();
     },
     stopRightRecord: function() {
@@ -474,12 +475,20 @@ export default {
       console.log(this.rightText);
       this.sentFactory(this.rightText, "right-convo");
       this.receivedFactory(this.rightText, "left-convo");
+      
+      var msgDiv = document.getElementsByTagName("html")[0];
+      console.log(msgDiv);
+      msgDiv.scrollTop = msgDiv.scrollHeight;
       this.rightText = "";
     },
     sendLeft: function() {
       console.log(this.leftText);
       this.sentFactory(this.leftText, "left-convo");
       this.receivedFactory(this.leftText, "right-convo");
+      
+      var msgDiv = document.getElementsByTagName("html")[0];
+      console.log(msgDiv);
+      msgDiv.scrollTop = msgDiv.scrollHeight;
       this.leftText = "";
     },
     sentFactory: function(message, convo) {
@@ -529,7 +538,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600&subset=latin-ext");
-#app {
+#t8-app {
   font-family: "Nunito Sans", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -549,6 +558,10 @@ export default {
   border-radius: 0px 20px 20px 0px;
   min-height: 50px;
   margin-bottom: 20px;
+}
+
+.fscrn {
+  min-height: 90vh;
 }
 
 .i-am-confusion {
@@ -587,8 +600,10 @@ export default {
 }
 
 .convo {
-  min-height: 90vh;
+  min-height: 80vh;
+  max-height: 80hvh;
   padding: 0px;
+  padding-bottom: 75px;
 }
 
 .convo-container {
