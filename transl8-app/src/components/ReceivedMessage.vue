@@ -2,13 +2,12 @@
 <v-layout row>
     <v-card class="text-card-received" v-bind:color="blockColor" style="margin-left:-25px; margin-top: 20px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 20px;">
         <v-card-text v-bind:color="textColor">{{this.text}}</v-card-text>
-        <v-btn
+    </v-card>
+    <v-btn
             small
-            absolute
             dark
             fab
-            top
-            right
+            style="margin-top: 25px;"
             color="blurple"
             class="help-btn"
             @click.native.stop="showConfusion = true"
@@ -17,18 +16,15 @@
         </v-btn>
         <v-btn
             small
-            absolute
             dark
             fab
-            top
-            right
+            style="margin-top: 25px;"
             color="blurple darken-1"
             class="help-btn"
             @click.native.stop="showConfusion = true"
              v-if="side=='right-convo'"
             >?
         </v-btn>
-    </v-card>
             <!-- REFACTOR THIS TO OWN COMPONENT, CONFUSION MODAL -->
             <v-dialog
                 v-model="showConfusion"

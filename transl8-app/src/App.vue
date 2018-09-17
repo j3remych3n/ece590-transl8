@@ -3,7 +3,8 @@
     <v-container fluid id="t8-container">
       <v-layout row>
         <v-flex xs6>
-          <v-toolbar class="top-toolbar" prominent color="hwhite" flat>
+          <v-toolbar class="topspacer" v-if="!convoEnabled()" prominent color="hwhite" flat></v-toolbar>
+          <v-toolbar class="toptoolbar" prominent color="hwhite" flat>
             <v-layout>
               <v-flex xs2>
                 <v-img id="logo" src="./static/logo.png" contain></v-img>
@@ -26,7 +27,8 @@
           </v-toolbar>
         </v-flex>
         <v-flex xs6>
-          <v-toolbar class="top-toolbar" prominent color="blurple" flat>
+          <v-toolbar class="topspacer" v-if="!convoEnabled()" prominent color="blurple" flat></v-toolbar>
+          <v-toolbar class="toptoolbar" prominent color="blurple" flat>
             <v-layout>
               <v-flex xs6>
                 <v-select 
@@ -355,8 +357,8 @@ export default {
     },
     translate: function(text, lang1, lang2, factory, convo) {
       let content = JSON.stringify([{ Text: text }]);
-      // let params = '&from=' + lang1 + '&to=' + lang2;
-      let params = "&to=" + lang2;
+      let params = '&from=' + lang1 + '&to=' + lang2;
+      // let params = "&to=" + lang2;
       let request_params = {
         method: "POST",
         hostname: host,
@@ -546,6 +548,10 @@ export default {
   color: #2c3e50;
 }
 
+.topspacer {
+  min-height: 45vh;
+}
+
 .text-card-sent {
   margin-top: 20px;
   border-radius: 20px 0px 0px 20px;
@@ -625,7 +631,7 @@ export default {
   min-height: 6vh;
 }
 
-.top-toolbar {
+.toptoolbar {
   margin: 0px;
   padding: 20px;
   min-height: 10vh;
