@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         initColors: function() {
-            if(this.side == 'left') this.blockColor = 'blurple'
+            if(this.side == 'left-convo') this.blockColor = 'blurple'
         }
     },
     beforeMount: function() {

@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import { EventBus } from '../event-bus.js';
+
 export default {
   name: "received-message",
   props: ["text", "side"],
@@ -60,11 +62,15 @@ export default {
     };
   },
   methods: {
+    injectConfusion: function() {
+      this.showConfusion = false;
+      EventBus.$emit('confusion', this.side, this.text);
+    },
     expire: function() {
       this.obfuscatable = false;
     },
     initColors: function() {
-      if (this.side == "left") this.blockColor = "hwhite darken-1";
+      if (this.side == "left-convo") this.blockColor = "hwhite darken-1";
     }
   },
   beforeMount: function() {
