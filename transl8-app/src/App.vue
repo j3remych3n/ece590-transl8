@@ -163,7 +163,7 @@ import Vue from "vue";
 import { EventBus } from "./event-bus.js";
 
 let https = require("https");
-let subscriptionKey = "a4d0c7a5720842ed83e77cb74c6ef0e9";
+let subscriptionKey = "a766f3caa92849fa87742b3b5989a3c4";
 let speechKey = "efa9e4a359814571bee3694144a4db48";
 let host = "api.cognitive.microsofttranslator.com";
 let langPath = "/languages?api-version=3.0";
@@ -414,6 +414,11 @@ export default {
       window.location.href = "https://transl8-jeremy-chen.herokuapp.com";
     },
     convoEnabled: function() {
+      if(Object.keys(this.langLeft).length > 0 &&
+        Object.keys(this.langRight).length > 0) {
+          var biccDaddy = document.getElementsByTagName('html')[0];
+          biccDaddy.style.overflowY = 'scroll';
+        }
       return (
         Object.keys(this.langLeft).length > 0 &&
         Object.keys(this.langRight).length > 0
@@ -495,7 +500,7 @@ export default {
     },
     sentFactory: function(message, convo) {
       var regex = "^\\s+$";
-      if (!message.match(regex)) {
+      if (!message.match(regex) && message != '') {
         var Sent = Vue.extend(SentMessage);
         var sent = new Sent({ propsData: { text: message, side: convo } });
         sent.$mount();
@@ -505,7 +510,7 @@ export default {
     },
     receivedFactory: function(message, convo) {
       var regex = "^\\s+$";
-      if (!message.match(regex)) {
+      if (!message.match(regex) && message != '') {
         if (convo == "left-convo") {
           this.translate(
             message,
@@ -553,17 +558,17 @@ export default {
 }
 
 .text-card-sent {
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 20px 0px 0px 20px;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .text-card-received {
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 0px 20px 20px 0px;
   min-height: 50px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .fscrn {
@@ -587,7 +592,7 @@ export default {
 #exit {
   margin-top: -25px;
   margin-right: -30px;
-  min-height: 6vh;
+  min-height: 58px;
   min-width: 3vw;
   border-radius: 0px 0px 0px 50px;
 }
@@ -606,10 +611,9 @@ export default {
 }
 
 .convo {
-  min-height: 80vh;
-  max-height: 80hvh;
+  min-height: 88vh;
   padding: 0px;
-  padding-bottom: 75px;
+  padding-bottom: 100px;
 }
 
 .convo-container {

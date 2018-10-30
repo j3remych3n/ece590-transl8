@@ -33,10 +33,10 @@ export default {
 
 <style>
 .sent {
-  margin-right: -25px; margin-top: 20px; min-height: 50px; margin-bottom: 20px;
+  margin-right: -25px; margin-top: 10px; min-height: 50px; margin-bottom: 10px;
 }
 
 .sent2 {
-    margin-right: -10px; margin-top: 20px; min-height: 50px; margin-bottom: 20px;
+    margin-right: -10px; margin-top: 10px; min-height: 50px; margin-bottom: 10px;
 }
 </style>

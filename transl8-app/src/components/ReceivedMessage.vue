@@ -1,13 +1,13 @@
 <template>
 <v-layout row>
-    <v-card class="text-card-received" v-bind:color="blockColor" style="margin-left:-25px; margin-top: 20px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 20px;">
+    <v-card class="text-card-received" v-bind:color="blockColor" style="margin-left:-25px; margin-top: 10px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 10px;">
         <v-card-text v-bind:color="textColor">{{this.text}}</v-card-text>
     </v-card>
     <v-btn
             small
             dark
             fab
-            style="margin-top: 25px;"
+            style="margin-top: 15px;"
             color="blurple"
             class="help-btn"
             @click.native.stop="showConfusion = true"
@@ -18,14 +18,13 @@
             small
             dark
             fab
-            style="margin-top: 25px;"
+            style="margin-top: 15px;"
             color="blurple darken-1"
             class="help-btn"
             @click.native.stop="showConfusion = true"
              v-if="side=='right-convo'"
             >?
         </v-btn>
-            <!-- REFACTOR THIS TO OWN COMPONENT, CONFUSION MODAL -->
             <v-dialog
                 v-model="showConfusion"
                 width="300px"
@@ -52,7 +51,6 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-            <!-- END CONFUSION MODAL -->
         <v-spacer></v-spacer>
     </v-layout>
 </template>
@@ -91,6 +89,6 @@ export default {
 
 <style>
 .text-card-received {
-  margin-top: 20px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 20px;
+  margin-top: 10px; border-radius: 0px 20px 20px 0px; min-height: 50px; margin-bottom: 10px;
 }
 </style>
