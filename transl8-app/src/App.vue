@@ -163,8 +163,8 @@ import Vue from "vue";
 import { EventBus } from "./event-bus.js";
 
 let https = require("https");
-let subscriptionKey = "a766f3caa92849fa87742b3b5989a3c4";
-let speechKey = "efa9e4a359814571bee3694144a4db48";
+let subscriptionKey = "REDACTED";
+let speechKey = "REDACTED";
 let host = "api.cognitive.microsofttranslator.com";
 let langPath = "/languages?api-version=3.0";
 let transPath = "/translate?api-version=3.0";
